@@ -1,6 +1,6 @@
 # Test SWAPI app
 
-Next.js app that characters from [SW API](https://swapi.dev/documentation)
+Next.js app that displays characters from [SW API](https://swapi.dev/documentation)
 
 ## Getting Started
 
