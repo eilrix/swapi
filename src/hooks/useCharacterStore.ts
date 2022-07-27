@@ -14,10 +14,12 @@ export function useCharacterStore(initial?: CharacterStore): CharacterStore {
     useEffect(() => {
         // Init store with data of the first page
         (async () => {
-            setLoading(true);
-            const data = await getPeople(1);
-            setCharacters(data);
-            setLoading(false);
+            if (!initial?.characters) {
+                setLoading(true);
+                const data = await getPeople(1);
+                setCharacters(data);
+                setLoading(false);
+            }
         })();
     }, []);
 

@@ -1,10 +1,11 @@
 import { Box } from '@mui/material';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 
 import CharacterSearch from '../components/characterSearch/CharacterSearch';
 import CharacterTable from '../components/characterTable/CharacterTable';
+import { CharacterProvider } from '../contexts/CharacterContext';
 
 const Home: NextPage = () => {
   return (
@@ -12,11 +13,12 @@ const Home: NextPage = () => {
       <Head>
         <title>Star wars characters</title>
       </Head>
-      <CharacterSearch />
-      <CharacterTable />
+      <CharacterProvider>
+        <CharacterSearch />
+        <CharacterTable />
+      </CharacterProvider>
     </Box>
   )
 }
 
 export default Home;
-

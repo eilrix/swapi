@@ -1,10 +1,11 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box, IconButton, Typography } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
+import Skeleton from '@mui/material/Skeleton';
+import { SxProps, Theme } from '@mui/system';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import Skeleton from '@mui/material/Skeleton';
 
 import { Character } from '../../types';
 import { getPerson } from '../../utils/swapi';
@@ -31,7 +32,7 @@ export default function CharacterPage() {
     getCharacter()
   }, [router.query.slug]);
 
-  const rowStyle = { display: 'flex', alignItems: 'center', py: 1 };
+  const rowStyle: SxProps<Theme> = { display: 'flex', alignItems: 'center', py: 1 };
 
   return (
     <Box>
@@ -48,8 +49,6 @@ export default function CharacterPage() {
           <LinearProgress />
         </Box>}
       </Box>
-
-
       <Box sx={{ bgcolor: '#fff', borderRadius: '10px', p: 3, mt: 4 }}>
         {loading && (
           <Box>

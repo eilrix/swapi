@@ -1,8 +1,9 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 
+import { CharacterProvider } from '../../contexts/CharacterContext';
 import CharacterTable from './CharacterTable';
-import { CharacterProvider } from '../../contexts/CharacterContext'
 
 (global as any).fetch = jest.fn(() =>
   Promise.resolve({

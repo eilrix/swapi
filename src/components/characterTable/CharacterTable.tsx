@@ -24,7 +24,7 @@ export default function DataTable() {
     px: 2,
   }
 
-  const headerStyle = {
+  const headerStyle: SxProps<Theme> = {
     ...cellStyle,
     fontWeight: 500,
   }
@@ -36,7 +36,7 @@ export default function DataTable() {
       borderRadius: '10px',
       display: 'flex', flexDirection: 'column',
     }}>
-      {/* Another option here is to use '@mui/x-data-grid' but it may look to easy for the task */}
+      {/* Another option here is to use '@mui/x-data-grid' but it may look too easy for the task */}
       <Box sx={{ display: 'flex', px: 3, py: 2, fontWeight: 600, }}>
         <Typography sx={headerStyle}>Name</Typography>
         <Typography sx={headerStyle}>Birth year</Typography>
