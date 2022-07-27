@@ -37,11 +37,9 @@ export default function CharacterPage() {
   return (
     <Box>
       <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: '#fff', borderRadius: '10px', p: 3, position: 'relative', overflow: 'hidden' }}>
-        <Link href="/"><a>
-          <IconButton sx={{ mr: 3 }}>
-            <ArrowBackIosNewIcon sx={{ color: '#000' }} />
-          </IconButton>
-        </a></Link>
+        <IconButton sx={{ mr: 3 }} onClick={() => router.back()}>
+          <ArrowBackIosNewIcon sx={{ color: '#000' }} />
+        </IconButton>
         <Typography variant="h1" sx={{ fontSize: '2em ' }} >
           {character?.name}
         </Typography>

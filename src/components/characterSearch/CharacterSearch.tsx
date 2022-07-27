@@ -1,24 +1,31 @@
 import { Box, TextField } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
-import React, { useCallback, useRef } from 'react';
+import queryString from 'query-string';
+import React, { useCallback, useEffect, useState } from 'react';
 import { debounce } from 'throttle-debounce';
 
 import { useCharacterList } from '../../hooks/useCharacterList';
 import { useCharacterSearch } from '../../hooks/useCharacterSearch';
 
+
 export default function CharacterSearch() {
-  const searchValue = useRef('');
+  const [searchValue, setSearchValue] = useState('');
   const searchCharacters = useCharacterSearch();
   const { loading } = useCharacterList();
 
-  const onChangeDebounced = useCallback(debounce(500, () => {
-    searchCharacters(searchValue.current, 1);
+  const onChangeDebounced = useCallback(debounce(500, (value) => {
+    searchCharacters(value, 1);
   }), []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    searchValue.current = e.target.value;
-    onChangeDebounced();
+    setSearchValue(e.target.value);
+    onChangeDebounced(e.target.value);
   }
+
+  useEffect(() => {
+    const init = queryString.parse(window.location.search).search;
+    if (init) setSearchValue(init as string);
+  }, []);
 
   return (
     <Box sx={{
@@ -43,6 +50,7 @@ export default function CharacterSearch() {
       mb: 2
     }}>
       <TextField onChange={handleSearchChange}
+        value={searchValue || ''}
         variant="filled"
         size="small"
         label="Search"

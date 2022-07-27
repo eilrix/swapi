@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import queryString from 'query-string';
 
 import { CharactersData, CharacterStore } from '../types';
-import { getPeople } from '../utils/swapi';
+import { searchPeople } from '../utils/swapi';
 
 /**
  * Used once in the app root 
@@ -15,8 +16,11 @@ export function useCharacterStore(initial?: CharacterStore): CharacterStore {
         // Init store with data of the first page
         (async () => {
             if (!initial?.characters) {
+                const query = queryString.parse(window.location.search);
+
                 setLoading(true);
-                const data = await getPeople(1);
+                const data = await searchPeople((query.search as string) || '',
+                    parseInt((query.page || 1) as string));
                 setCharacters(data);
                 setLoading(false);
             }
