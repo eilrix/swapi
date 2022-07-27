@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   return (
     <Box >
       <Head>
-        <title>Start wars characterSearch</title>
+        <title>Star wars characters</title>
       </Head>
       <CharacterSearch />
       <CharacterTable />

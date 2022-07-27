@@ -4,6 +4,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
+import Skeleton from '@mui/material/Skeleton';
 
 import { Character } from '../../types';
 import { getPerson } from '../../utils/swapi';
@@ -34,12 +35,12 @@ export default function CharacterPage() {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: '#fff', borderRadius: '10px', p: 3, position: 'relative' }}>
-        <Link href="/">
+      <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: '#fff', borderRadius: '10px', p: 3, position: 'relative', overflow: 'hidden' }}>
+        <Link href="/"><a>
           <IconButton sx={{ mr: 3 }}>
             <ArrowBackIosNewIcon sx={{ color: '#000' }} />
           </IconButton>
-        </Link>
+        </a></Link>
         <Typography variant="h1" sx={{ fontSize: '2em ' }} >
           {character?.name}
         </Typography>
@@ -47,19 +48,30 @@ export default function CharacterPage() {
           <LinearProgress />
         </Box>}
       </Box>
+
+
       <Box sx={{ bgcolor: '#fff', borderRadius: '10px', p: 3, mt: 4 }}>
-        <Box sx={rowStyle}>
-          <Typography sx={{ mr: 2, fontWeight: '500' }}>Birth year: </Typography>
-          <Typography>{character?.birth_year}</Typography>
-        </Box>
-        <Box sx={rowStyle}>
-          <Typography sx={{ mr: 2, fontWeight: '500' }}>Height: </Typography>
-          <Typography>{character?.height}</Typography>
-        </Box>
-        <Box sx={rowStyle}>
-          <Typography sx={{ mr: 2, fontWeight: '500' }}>Eye color: </Typography>
-          <Typography>{character?.eye_color}</Typography>
-        </Box>
+        {loading && (
+          <Box>
+            <Skeleton sx={{ my: 2 }} />
+            <Skeleton sx={{ my: 2 }} />
+            <Skeleton sx={{ my: 2 }} />
+          </Box>
+        )}
+        {!loading && (<>
+          <Box sx={rowStyle}>
+            <Typography sx={{ mr: 2, fontWeight: '500' }}>Birth year: </Typography>
+            <Typography>{character?.birth_year}</Typography>
+          </Box>
+          <Box sx={rowStyle}>
+            <Typography sx={{ mr: 2, fontWeight: '500' }}>Height: </Typography>
+            <Typography>{character?.height}</Typography>
+          </Box>
+          <Box sx={rowStyle}>
+            <Typography sx={{ mr: 2, fontWeight: '500' }}>Eye color: </Typography>
+            <Typography>{character?.eye_color}</Typography>
+          </Box>
+        </>)}
       </Box>
     </Box>
   )

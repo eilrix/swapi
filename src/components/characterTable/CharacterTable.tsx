@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { SxProps, Theme } from '@mui/system';
 import Link from 'next/link';
@@ -24,18 +24,24 @@ export default function DataTable() {
     px: 2,
   }
 
+  const headerStyle = {
+    ...cellStyle,
+    fontWeight: 500,
+  }
+
   return (
     <Box sx={{
-      height: 650, width: '100%',
+      width: '100%',
       bgcolor: '#fff', my: 2,
       borderRadius: '10px',
+      display: 'flex', flexDirection: 'column',
     }}>
       {/* Another option here is to use '@mui/x-data-grid' but it may look to easy for the task */}
       <Box sx={{ display: 'flex', px: 3, py: 2, fontWeight: 600, }}>
-        <Box sx={cellStyle}>Name</Box>
-        <Box sx={cellStyle}>Birth year</Box>
-        <Box sx={cellStyle}>Height</Box>
-        <Box sx={cellStyle}>Eye color</Box>
+        <Typography sx={headerStyle}>Name</Typography>
+        <Typography sx={headerStyle}>Birth year</Typography>
+        <Typography sx={headerStyle}>Height</Typography>
+        <Typography sx={headerStyle}>Eye color</Typography>
       </Box>
       {list.map(item => (
         <Box key={item.id} sx={{
@@ -46,16 +52,16 @@ export default function DataTable() {
         }}>
           <Link href={`/character/${item.id}`}><a>
             <Box sx={{ px: 3, py: 2, display: 'flex' }}>
-              <Box sx={cellStyle}>{item.name}</Box>
-              <Box sx={cellStyle}>{item.birth_year}</Box>
-              <Box sx={cellStyle}>{item.height}</Box>
-              <Box sx={cellStyle}>{item.eye_color}</Box>
+              <Typography sx={cellStyle}>{item.name}</Typography>
+              <Typography sx={cellStyle}>{item.birth_year}</Typography>
+              <Typography sx={cellStyle}>{item.height}</Typography>
+              <Typography sx={cellStyle}>{item.eye_color}</Typography>
             </Box>
           </a></Link>
         </Box>
       ))
       }
-      <Box sx={{ py: 1, px: 3, mt: 2, }}>
+      <Box sx={{ py: 1, px: 3, my: 2 }}>
         <Pagination count={Math.ceil(totalCount / pageSize)}
           boundaryCount={2}
           siblingCount={0}
