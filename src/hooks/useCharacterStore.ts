@@ -17,6 +17,7 @@ export function useCharacterStore(initial?: CharacterStore): CharacterStore {
         (async () => {
             if (!initial?.characters) {
                 const query = queryString.parse(window.location.search);
+                if (query.search) setLastQuery(query.search as string);
 
                 setLoading(true);
                 const data = await searchPeople((query.search as string) || '',
